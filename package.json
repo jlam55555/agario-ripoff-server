@@ -1,0 +1,12 @@
+{
+  "name": "agario-ripoff-server",
+  "version": "0.0.1",
+  "description": "The server for the agario-ripoff game",
+  "dependencies": {
+    "express": "*",
+    "socket.io": "*"
+  },
+  "repository": {
+  },
+  "license": "MIT"
+}
