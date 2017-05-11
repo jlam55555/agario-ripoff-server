@@ -45,6 +45,7 @@ setInterval(checkSkittles, 500);
 
 // socket stuff
 io.on("connection", function(socket) {
+  console.log("a new player has entered");
   var player;
   socket.on("create", function(playerName) {
     player = new Player(playerName);
@@ -59,4 +60,8 @@ io.on("connection", function(socket) {
     socket.emit(map);
   }, 10);
   
+});
+
+http.listen(3000, function(){
+  console.log('listening on *:3000');
 });
