@@ -54,7 +54,7 @@ io.on("connection", function(socket) {
   socket.on("update", function(x, y) {
     player.x = x;
     player.y = y;
-  };
+  });
   setInterval("map", function() {
     socket.emit(map);
   }, 10);
