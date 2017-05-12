@@ -43,6 +43,11 @@ var checkSkittles = function() {
 }
 setInterval(checkSkittles, 500);
 
+// listen to port
+http.listen(process.env.PORT || 3000, function() {
+  console.log('listening on *:' + (process.env.PORT || 3000));
+});
+
 // socket stuff
 io.on("connection", function(socket) {
   console.log("a new player has entered");
@@ -62,6 +67,3 @@ io.on("connection", function(socket) {
   
 });
 
-http.listen(process.env.PORT || 5000, function(){
-  console.log('listening on *:' + (process.env.PORT || 5000));
-});
