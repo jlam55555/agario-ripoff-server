@@ -52,10 +52,11 @@ http.listen(process.env.PORT || 5000, function() {
 io.on("connection", function(socket) {
   console.log("a new player has entered");
   var player;
-  socket.on("create", function(playerName) {
+  socket.on("name", function(playerName) {
     player = new Player(playerName);
     map.players.push(player);
     socket.emit("player", player);
+    console.log("player emitted");
   }); 
   socket.on("update", function(x, y) {
     player.x = x;
