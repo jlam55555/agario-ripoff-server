@@ -56,7 +56,7 @@ var checkPlayers = function() {
       var xDiff = player1.x - player2.x;
       var yDiff = player1.y - player2.y;
       var distance = Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
-      if(distance < 10*(player1.score+player2.score) {
+      if(distance < 10*(player1.score+player2.score)) {
         player1.health -= 0.1;
         player2.health -= 0.1;
       }
