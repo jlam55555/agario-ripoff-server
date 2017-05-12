@@ -32,9 +32,9 @@ var checkSkittles = function() {
       var xDiff = player.x - skittle.x;
       var yDiff = player.y - skittle.y;
       var distance = Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
-      if(distance < 10) {
+      if(distance < 10*player.score) {
 	console.log(player.x, skittle.x, player.y, skittle.y, player.score);
-        player.score += 0.1;
+        player.score += 0.001;
         map.skittles.splice(map.skittles.indexOf(skittle), 1);
         break;
       }
