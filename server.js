@@ -56,16 +56,15 @@ io.on("connection", function(socket) {
     player = new Player(playerName);
     map.players.push(player);
     socket.emit("player", player);
-    console.log("player emitted");
+    setInterval(function() {
+      socket.emit("mapScoreUpdate", map, player.score);
+    }, 10);
   }); 
   socket.on("positionUpdate", function(x, y) {
     player.x = x;
     player.y = y;
   });
   socket.emit("mapDimensions", mapWidth, mapHeight);
-  setInterval(function() {
-    socket.emit("mapScoreUpdate", map, player.score);
-  }, 10);
   
 });
 
