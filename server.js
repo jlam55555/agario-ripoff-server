@@ -2,11 +2,11 @@ var app = require("express")();
 var http = require("http").Server(app);
 var io = require("socket.io")(http);
 
-var mapWidth = 1000;
-var mapHeight = 1000;
+var mapWidth = 5000;
+var mapHeight = 5000;
 var map = {skittles: [], players: []};
 
-var colors = ["red", "green", "blue"];
+var colors = ["#e74c3c", "#e67e22", "#9b59b6", "#3498db", "#2ecc71"];
 var Skittle = function() {
   this.x = Math.random()*mapWidth;
   this.y = Math.random()*mapHeight;
@@ -23,7 +23,7 @@ var Player = function(playerName) {
 
 // automatically generate skittles
 var createSkittles = function() {
-  while(map.skittles.length < 400) {
+  while(map.skittles.length < 200) {
     map.skittles.push(new Skittle());
   }
 };
