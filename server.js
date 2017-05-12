@@ -54,8 +54,8 @@ io.on("connection", function(socket) {
   var player;
   socket.on("name", function(playerName) {
     player = new Player(playerName);
-    console.log("Player \"" + player.name + "\" (id " + player.id + ") has entered. " + map.players.length + " players currently online.");
     map.players.push(player);
+    console.log("Player \"" + player.name + "\" (id " + player.id + ") has entered. " + map.players.length + " players currently online.");
     socket.emit("player", player);
     setInterval(function() {
       socket.emit("mapScoreUpdate", map, player.score);
