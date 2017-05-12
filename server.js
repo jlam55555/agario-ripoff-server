@@ -58,13 +58,13 @@ io.on("connection", function(socket) {
     socket.emit("player", player);
     console.log("player emitted");
   }); 
-  socket.on("update", function(x, y) {
+  socket.on("positionUpdate", function(x, y) {
     player.x = x;
     player.y = y;
   });
   socket.emit("mapDimensions", mapWidth, mapHeight);
   setInterval(function() {
-    socket.emit("map", map);
+    socket.emit("mapScoreUpdate", map, player.score);
   }, 10);
   
 });
