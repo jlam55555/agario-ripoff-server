@@ -62,9 +62,10 @@ io.on("connection", function(socket) {
     player.x = x;
     player.y = y;
   });
+  socket.emit("mapDimensions", mapWidth, mapHeight);
   setInterval(function() {
     socket.emit("map", map);
-  }, 10);
+  }, 500);
   
 });
 
