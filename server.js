@@ -65,7 +65,7 @@ io.on("connection", function(socket) {
   socket.emit("mapDimensions", mapWidth, mapHeight);
   setInterval(function() {
     socket.emit("map", map);
-  }, 500);
+  }, 10);
   
 });
 
