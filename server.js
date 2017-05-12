@@ -49,6 +49,20 @@ var checkSkittles = function() {
   }
 }
 setInterval(checkSkittles, 10);
+var checkPlayers = function() {
+  for(var player1 of map.players) {
+    for(var player2 of map.players) {
+      if(player1.id == player2.id) continue;
+      var xDiff = player1.x - player2.x;
+      var yDiff = player1.y - player2.y;
+      var distance = Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
+      if(distance < 10*(player1.score+player2.score) {
+        player1.health -= 0.1;
+        player2.health -= 0.1;
+      }
+    }
+  }
+};
 
 // listen to port
 http.listen(process.env.PORT || 5000, function() {
