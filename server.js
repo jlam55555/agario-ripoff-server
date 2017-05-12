@@ -78,7 +78,7 @@ io.on("connection", function(socket) {
     console.log("Player \"" + player.name + "\" (id " + player.id + ") has entered. " + map.players.length + " players currently online.");
     socket.emit("player", player);
     setInterval(function() {
-      socket.emit("mapScoreUpdate", map, player.score);
+      socket.emit("mapScoreUpdate", map, player.score, player.health);
     }, 10);
     socket.on("positionUpdate", function(x, y) {
       player.x = x;
