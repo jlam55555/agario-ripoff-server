@@ -41,7 +41,7 @@ var checkSkittles = function() {
     }
   }
 }
-setInterval(checkSkittles, 500);
+setInterval(checkSkittles, 10);
 
 // listen to port
 http.listen(process.env.PORT || 5000, function() {
