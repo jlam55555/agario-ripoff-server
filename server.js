@@ -53,8 +53,8 @@ http.listen(process.env.PORT || 5000, function() {
 io.on("connection", function(socket) {
   var player;
   socket.on("name", function(playerName) {
-    console.log("Player \"" + player.name + "\" (id " + player.id + ") has entered. " + map.players.length + " players currently online.");
     player = new Player(playerName);
+    console.log("Player \"" + player.name + "\" (id " + player.id + ") has entered. " + map.players.length + " players currently online.");
     map.players.push(player);
     socket.emit("player", player);
     setInterval(function() {
