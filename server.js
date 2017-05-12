@@ -64,12 +64,12 @@ io.on("connection", function(socket) {
       player.x = x;
       player.y = y;
     });
+    socket.on("disconnect", function() {
+      map.players.splice(map.players.indexOf(player));
+      console.log("Player \"" + player.name + "\" (id " + player.id + ") has left. " + map.players.length + " players currently online.");
+    });
   }); 
   socket.emit("mapDimensions", mapWidth, mapHeight);
-  socket.on("disconnect", function() {
-    map.players.splice(map.players.indexOf(player));
-    console.log("Player \"" + player.name + "\" (id " + player.id + ") has left. " + map.players.length + " players currently online.");
-  });
   
 });
 
