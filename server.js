@@ -1,4 +1,4 @@
-var app = require("express");
+var app = require("express")();
 var http = require("http").Server(app);
 var io = require("socket.io")(http);
 
@@ -43,9 +43,9 @@ var checkSkittles = function() {
 }
 setInterval(checkSkittles, 500);
 
-app.get('/', function(req, res){
+/*app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
-});
+});*/
 
 // listen to port
 http.listen(process.env.PORT || 3000, function() {
