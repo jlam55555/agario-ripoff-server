@@ -19,6 +19,12 @@ var Player = function(playerName) {
   this.y = Math.random()*mapHeight;
   this.color = colors[Math.floor(Math.random()*colors.length)];
   this.score = 1;
+  this.health = 1;
+  this.upgrades = {
+    health: 0,
+    speed: 0,
+    damage: 0
+  };
 };
 
 // automatically generate skittles
