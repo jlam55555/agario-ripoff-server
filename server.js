@@ -12,7 +12,9 @@ var Skittle = function() {
   this.y = Math.random()*mapHeight;
   this.color = colors[Math.floor(Math.random()*colors.length)];
 }
-var Player = function() {
+var Player = function(playerName) {
+  this.name = playerName;
+  this.id = new Date().valueOf();
   this.x = Math.random()*mapWidth;
   this.y = Math.random()*mapHeight;
   this.color = colors[Math.floor(Math.random()*colors.length)];
