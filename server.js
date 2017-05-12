@@ -43,6 +43,10 @@ var checkSkittles = function() {
 }
 setInterval(checkSkittles, 500);
 
+app.get('/', function(req, res){
+  res.sendFile(__dirname + '/index.html');
+});
+
 // listen to port
 http.listen(process.env.PORT || 3000, function() {
   console.log('listening on *:' + (process.env.PORT || 3000));
