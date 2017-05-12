@@ -43,13 +43,9 @@ var checkSkittles = function() {
 }
 setInterval(checkSkittles, 500);
 
-/*app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
-});*/
-
 // listen to port
-http.listen(process.env.PORT || 3000, function() {
-  console.log('listening on *:' + (process.env.PORT || 3000));
+http.listen(process.env.PORT || 5000, function() {
+  console.log('listening on *:' + (process.env.PORT || 5000));
 });
 
 // socket stuff
@@ -65,8 +61,8 @@ io.on("connection", function(socket) {
     player.x = x;
     player.y = y;
   });
-  setInterval("map", function() {
-    socket.emit(map);
+  setInterval(function() {
+    socket.emit("map", map);
   }, 10);
   
 });
