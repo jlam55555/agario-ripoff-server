@@ -59,11 +59,11 @@ io.on("connection", function(socket) {
     setInterval(function() {
       socket.emit("mapScoreUpdate", map, player.score);
     }, 10);
+    socket.on("positionUpdate", function(x, y) {
+      player.x = x;
+      player.y = y;
+    });
   }); 
-  socket.on("positionUpdate", function(x, y) {
-    player.x = x;
-    player.y = y;
-  });
   socket.emit("mapDimensions", mapWidth, mapHeight);
   
 });
