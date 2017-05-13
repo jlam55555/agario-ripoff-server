@@ -75,8 +75,8 @@ setInterval(checkPlayers, 40);
 var movePlayers = function() {
   for(var player of map.players) {
     if(player.direction === undefined) continue;
-    var newX = Math.min(Math.max(player.x+0.75*Math.cos(player.direction)*3+0.25*player.oldX, 0), mapWidth);  // change speed later
-    var newY = Math.min(Math.max(player.y+0.75*Math.sin(player.direction)*3+0.25*player.oldY, 0), mapHeight);
+    var newX = Math.min(Math.max(player.x+0.5*Math.cos(player.direction)*3+0.5*player.oldX, 0), mapWidth);  // change speed later
+    var newY = Math.min(Math.max(player.y+0.5*Math.sin(player.direction)*3+0.5*player.oldY, 0), mapHeight);
     player.oldX = newX - player.x;
     player.oldY = newY - player.y;
     player.x = newX;
