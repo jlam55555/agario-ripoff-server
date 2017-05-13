@@ -66,9 +66,9 @@ var checkPlayers = function() {
 setInterval(checkPlayers, 40);
 var movePlayers = function() {
   for(var player of map.players) {
-    if(!player.direction) continue;
-    player.x += Math.cos(player.direction)*3;
-    player.y += Math.sin(player.direction)*3;
+    if(player.direction === undefined) continue;
+    player.x += Math.min(Math.max(Math.cos(player.direction)*3, 0), mapWidth);
+    player.y += Math.min(Math.max(Math.sin(player.direction)*3, 0), mapHeight);
   }
 };
 setInterval(movePlayers, 40);
@@ -88,16 +88,11 @@ io.on("connection", function(socket) {
     socket.emit("player", player);
     setInterval(function() {
       socket.emit("update", map, player.score, player.health, player.x, player.y);
-      console.log(player.score, player.health, player.x, player.y);
       if(player.health <= 0) {
         socket.emit("died");
         socket.disconnect();
       }
     }, 20);
-    /*socket.on("positionUpdate", function(x, y) {
-      player.x = x;
-      player.y = y;
-    });*/
     socket.on("direction", function(degrees) {
       player.direction = degrees * Math.PI/180;
     });
