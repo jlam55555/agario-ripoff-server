@@ -2,8 +2,8 @@ var app = require("express")();
 var http = require("http").Server(app);
 var io = require("socket.io")(http);
 
-var mapWidth = 5000;
-var mapHeight = 5000;
+var mapWidth = 50;
+var mapHeight = 50;
 var map = {skittles: [], players: []};
 
 var colors = ["#e74c3c", "#e67e22", "#9b59b6", "#3498db", "#2ecc71"];
@@ -21,6 +21,8 @@ var Player = function(playerName) {
   this.score = 1;
   this.money = 0;
   this.health = 1;
+  this.oldX = 0;
+  this.oldY = 0;
   this.upgrades = {
     health: 0,
     speed: 0,
@@ -30,7 +32,7 @@ var Player = function(playerName) {
 
 // automatically generate skittles
 var createSkittles = function() {
-  while(map.skittles.length < 200) {
+  while(map.skittles.length < 10) {
     map.skittles.push(new Skittle());
   }
 };
@@ -61,6 +63,10 @@ var checkPlayers = function() {
       if(distance < 10*(player1.score+player2.score)) {
         player1.health -= 0.1;
         player2.health -= 0.1;
+        player1.collisionDirection = player2.direction;
+        player2.collisionDirection = player1.direction;
+        player1.collisionStrength = 3;  // change speed later
+        player2.collisionStrength = 3;
       }
     }
   }
@@ -69,8 +75,12 @@ setInterval(checkPlayers, 40);
 var movePlayers = function() {
   for(var player of map.players) {
     if(player.direction === undefined) continue;
-    player.x = Math.min(Math.max(player.x+Math.cos(player.direction)*3, 0), mapWidth);
-    player.y = Math.min(Math.max(player.y+Math.sin(player.direction)*3, 0), mapHeight);
+    var newX = Math.min(Math.max(player.x+0.75*Math.cos(player.direction)*3+0.25*player.oldX, 0), mapWidth);  // change speed later
+    var newY = Math.min(Math.max(player.y+0.75*Math.sin(player.direction)*3+0.25*player.oldY, 0), mapHeight);
+    player.oldX = newX - player.x;
+    player.oldY = newY - player.y;
+    player.x = newX;
+    player.y = newY;
   }
 };
 setInterval(movePlayers, 40);
