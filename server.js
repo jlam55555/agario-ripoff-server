@@ -19,6 +19,7 @@ var Player = function(playerName) {
   this.y = Math.random()*mapHeight;
   this.color = colors[Math.floor(Math.random()*colors.length)];
   this.score = 1;
+  this.money = 0;
   this.health = 1;
   this.upgrades = {
     health: 0,
@@ -42,6 +43,7 @@ var checkSkittles = function() {
       var distance = Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
       if(distance < 10*player.score) {
         player.score += 0.005;
+        player.money++;
         map.skittles.splice(map.skittles.indexOf(skittle), 1);
         break;
       }
@@ -87,7 +89,7 @@ io.on("connection", function(socket) {
     console.log("Player \"" + player.name + "\" (id " + player.id + ") has entered. " + map.players.length + " players currently online.");
     socket.emit("player", player);
     setInterval(function() {
-      socket.emit("update", map, player.score, player.health, player.x, player.y);
+      socket.emit("update", map, player.score, player.health, player.x, player.y, player.money);
       if(player.health <= 0) {
         socket.emit("died");
         socket.disconnect();
