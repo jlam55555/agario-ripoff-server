@@ -48,7 +48,7 @@ var checkSkittles = function() {
     }
   }
 }
-setInterval(checkSkittles, 10);
+setInterval(checkSkittles, 40);
 var checkPlayers = function() {
   for(var player1 of map.players) {
     for(var player2 of map.players) {
@@ -63,7 +63,7 @@ var checkPlayers = function() {
     }
   }
 };
-setInterval(checkPlayers, 10);
+setInterval(checkPlayers, 40);
 
 // listen to port
 http.listen(process.env.PORT || 5000, function() {
