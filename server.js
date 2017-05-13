@@ -99,7 +99,7 @@ io.on("connection", function(socket) {
     console.log("Player \"" + player.name + "\" (id " + player.id + ") has entered. " + map.players.length + " players currently online.");
     socket.emit("player", player);
     setInterval(function() {
-      socket.emit("update", map, player.score, player.health, player.x, player.y, player.money);
+      socket.emit("update", map, player);
       if(player.health <= 0) {
         socket.emit("died");
         socket.disconnect();
