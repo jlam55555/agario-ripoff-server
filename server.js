@@ -82,7 +82,7 @@ io.on("connection", function(socket) {
       socket.emit("mapScoreUpdate", map, player.score, player.health);
       if(player.health <= 0) {
         socket.emit("died");
-        socket.emit("disconnect");
+        socket.disconnect();
       }
     }, 10);
     socket.on("positionUpdate", function(x, y) {
