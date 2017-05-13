@@ -84,7 +84,7 @@ io.on("connection", function(socket) {
         socket.emit("died");
         socket.disconnect();
       }
-    }, 10);
+    }, 20);
     socket.on("positionUpdate", function(x, y) {
       player.x = x;
       player.y = y;
