@@ -2,8 +2,8 @@ var app = require("express")();
 var http = require("http").Server(app);
 var io = require("socket.io")(http);
 
-var mapWidth = 50;
-var mapHeight = 50;
+var mapWidth = 500;
+var mapHeight = 500;
 var map = {skittles: [], players: []};
 
 var colors = ["#e74c3c", "#e67e22", "#9b59b6", "#3498db", "#2ecc71"];
