@@ -67,8 +67,8 @@ setInterval(checkPlayers, 40);
 var movePlayers = function() {
   for(var player of map.players) {
     if(player.direction === undefined) continue;
-    player.x += Math.min(Math.max(Math.cos(player.direction)*3, 0), mapWidth);
-    player.y += Math.min(Math.max(Math.sin(player.direction)*3, 0), mapHeight);
+    player.x = Math.min(Math.max(player.x+Math.cos(player.direction)*3, 0), mapWidth);
+    player.y = Math.min(Math.max(player.y+Math.sin(player.direction)*3, 0), mapHeight);
   }
 };
 setInterval(movePlayers, 40);
