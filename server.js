@@ -80,6 +80,10 @@ io.on("connection", function(socket) {
     socket.emit("player", player);
     setInterval(function() {
       socket.emit("mapScoreUpdate", map, player.score, player.health);
+      if(player.health <= 0) {
+        socket.emit("died");
+        socket.emit("disconnect");
+      }
     }, 10);
     socket.on("positionUpdate", function(x, y) {
       player.x = x;
