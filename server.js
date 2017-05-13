@@ -61,12 +61,12 @@ var checkPlayers = function() {
       var yDiff = player1.y - player2.y;
       var distance = Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
       if(distance < 10*(player1.score+player2.score)) {
-        player1.health -= 0.1;
-        player2.health -= 0.1;
-        player1.collisionDirection = player2.direction;
-        player2.collisionDirection = player1.direction;
-        player1.collisionStrength = 3;  // change speed later
-        player2.collisionStrength = 3;
+        player1.health -= 0.05;
+        player2.health -= 0.05;
+        player1.oldX += Math.cos(player2.direction)*10;
+        player1.oldY += Math.sin(player2.direction)*10;
+        player2.oldX += Math.cos(player1.direction)*10;
+        player2.oldY += Math.sin(player1.direction)*10;
       }
     }
   }
