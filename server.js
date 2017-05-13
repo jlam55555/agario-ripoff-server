@@ -60,10 +60,10 @@ var checkPlayers = function() {
         player1.health -= 0.1;
         player2.health -= 0.1;
       }
-      console.log(distance, distance < 10*(player1.score+player2.score));
     }
   }
 };
+setInterval(checkPlayers, 10);
 
 // listen to port
 http.listen(process.env.PORT || 5000, function() {
