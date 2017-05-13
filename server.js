@@ -64,6 +64,13 @@ var checkPlayers = function() {
   }
 };
 setInterval(checkPlayers, 40);
+var movePlayers = function() {
+  for(var player of map.players) {
+    player.x += Math.cos(player.direction)*3;
+    player.y += Math.sin(player.direction)*3;
+  }
+};
+setInterval(movePlayers, 40);
 
 // listen to port
 http.listen(process.env.PORT || 5000, function() {
@@ -79,15 +86,18 @@ io.on("connection", function(socket) {
     console.log("Player \"" + player.name + "\" (id " + player.id + ") has entered. " + map.players.length + " players currently online.");
     socket.emit("player", player);
     setInterval(function() {
-      socket.emit("mapScoreUpdate", map, player.score, player.health);
+      socket.emit("update", map, player.score, player.health, player.x, player.y);
       if(player.health <= 0) {
         socket.emit("died");
         socket.disconnect();
       }
     }, 20);
-    socket.on("positionUpdate", function(x, y) {
+    /*socket.on("positionUpdate", function(x, y) {
       player.x = x;
       player.y = y;
+    });*/
+    socket.on("direction", function(degrees) {
+      player.direction = degrees * Math.PI/180;
     });
     socket.on("disconnect", function() {
       map.players.splice(map.players.indexOf(player));
