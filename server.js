@@ -87,6 +87,7 @@ io.on("connection", function(socket) {
     socket.emit("player", player);
     setInterval(function() {
       socket.emit("update", map, player.score, player.health, player.x, player.y);
+      console.log(player.score, player.health, player.x, player.y);
       if(player.health <= 0) {
         socket.emit("died");
         socket.disconnect();
