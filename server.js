@@ -66,6 +66,7 @@ var checkPlayers = function() {
 setInterval(checkPlayers, 40);
 var movePlayers = function() {
   for(var player of map.players) {
+    if(!player.direction) continue;
     player.x += Math.cos(player.direction)*3;
     player.y += Math.sin(player.direction)*3;
   }
