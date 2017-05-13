@@ -60,6 +60,7 @@ var checkPlayers = function() {
         player1.health -= 0.1;
         player2.health -= 0.1;
       }
+      console.log(distance, distance < 10*(player1.score+player2.score));
     }
   }
 };
