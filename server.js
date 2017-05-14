@@ -65,7 +65,7 @@ var checkPlayers = function() {
       if(distance < 10*(player1.score+player2.score)) {
         player1.health -= 0.05 * Math.pow(0.9, player1.upgrades.health) * Math.pow(10/9, player2.upgrades.damage);
         player2.health -= 0.05 * Math.pow(0.9, player2.upgrades.health) * Math.pow(10/9, player1.upgrades.damage);
-        var combinedSpeed = (player1.speed+player2.speed)*10;
+        var combinedSpeed = (player1.speed+player2.speed);
         player1.oldX += Math.cos(player2.direction)*combinedSpeed;
         player1.oldY += Math.sin(player2.direction)*combinedSpeed;
         player2.oldX += Math.cos(player1.direction)*combinedSpeed;
@@ -107,7 +107,7 @@ io.on("connection", function(socket) {
         socket.emit("died");
         socket.disconnect();
       }
-      player.health = Math.min(player.health + 0.005*(player.upgrades.regen+1), 1);
+      player.health = Math.min(player.health + 0.005*(player.upgrades.regen+1), 0);
     }, 20);
     socket.on("direction", function(degrees) {
       player.direction = degrees * Math.PI/180;
