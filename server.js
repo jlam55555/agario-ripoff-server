@@ -26,7 +26,8 @@ var Player = function(playerName) {
   this.upgrades = {
     health: 0,
     speed: 0,
-    damage: 0
+    damage: 0,
+    regen: 0
   };
 };
 
@@ -107,6 +108,21 @@ io.on("connection", function(socket) {
     }, 20);
     socket.on("direction", function(degrees) {
       player.direction = degrees * Math.PI/180;
+    });
+    socket.on("update", function(type) {
+      if(type == "health" && player.money >= player.upgrades.health+1) {
+        player.upgrades.health++;
+        player.money -= player.upgrades.health;
+      } else if(type == "speed" && player.money > player.upgrades.speed+1) {
+        player.upgrades.speed++;
+        player.money -= player.upgrades.speed;
+      } else if(type == "damage" && player.money > player.upgrades.damage+1) {
+        player.upgrades.damage++;
+        player.money -= player.upgrades.damage;
+      } else if(type == "regen" && player.money > player.upgrades.regen+1) {
+        player.upgrades.regen++;
+        player.money -= player.upgrades.regen;
+      {
     });
     socket.on("disconnect", function() {
       map.players.splice(map.players.indexOf(player));
