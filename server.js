@@ -113,13 +113,13 @@ io.on("connection", function(socket) {
       if(type == "health" && player.money >= player.upgrades.health+1) {
         player.upgrades.health++;
         player.money -= player.upgrades.health;
-      } else if(type == "speed" && player.money > player.upgrades.speed+1) {
+      } else if(type == "speed" && player.money >= player.upgrades.speed+1) {
         player.upgrades.speed++;
         player.money -= player.upgrades.speed;
-      } else if(type == "damage" && player.money > player.upgrades.damage+1) {
+      } else if(type == "damage" && player.money >= player.upgrades.damage+1) {
         player.upgrades.damage++;
         player.money -= player.upgrades.damage;
-      } else if(type == "regen" && player.money > player.upgrades.regen+1) {
+      } else if(type == "regen" && player.money >= player.upgrades.regen+1) {
         player.upgrades.regen++;
         player.money -= player.upgrades.regen;
       }
