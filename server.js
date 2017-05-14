@@ -122,7 +122,7 @@ io.on("connection", function(socket) {
       } else if(type == "regen" && player.money > player.upgrades.regen+1) {
         player.upgrades.regen++;
         player.money -= player.upgrades.regen;
-      {
+      }
     });
     socket.on("disconnect", function() {
       map.players.splice(map.players.indexOf(player));
