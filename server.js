@@ -107,7 +107,7 @@ io.on("connection", function(socket) {
         socket.emit("died");
         socket.disconnect();
       }
-      player.health = Math.min(player.health + 0.005*(player.regen+1), 1);
+      player.health = Math.min(player.health + 0.005*(player.upgrades.regen+1), 1);
     }, 20);
     socket.on("direction", function(degrees) {
       player.direction = degrees * Math.PI/180;
