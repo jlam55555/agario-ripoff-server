@@ -63,8 +63,8 @@ var checkPlayers = function() {
       var yDiff = player1.y - player2.y;
       var distance = Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
       if(distance < 10*(player1.score+player2.score)) {
-        player1.health -= 0.05 * Math.pow(0.9, player1.health) * Math.pow(10/9, player2.damage);
-        player2.health -= 0.05 * Math.pow(0.9, player2.health) * Math.pow(10/9, player1.damage);
+        player1.health -= 0.05 * Math.pow(0.9, player1.upgrades.health) * Math.pow(10/9, player2.upgrades.damage);
+        player2.health -= 0.05 * Math.pow(0.9, player2.upgrades.health) * Math.pow(10/9, player1.upgrades.damage);
         var combinedSpeed = (player1.speed+player2.speed)*10;
         player1.oldX += Math.cos(player2.direction)*combinedSpeed;
         player1.oldY += Math.sin(player2.direction)*combinedSpeed;
