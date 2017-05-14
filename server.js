@@ -104,7 +104,6 @@ io.on("connection", function(socket) {
     setInterval(function() {
       socket.emit("update", map, player);
       if(player.health <= 0) {
-        console.log(player.health);
         socket.emit("died");
         socket.disconnect();
       }
@@ -131,7 +130,7 @@ io.on("connection", function(socket) {
       }
     });
     socket.on("disconnect", function() {
-      map.players.splice(map.players.indexOf(player));
+      map.players.splice(map.players.indexOf(player), 1);
       console.log("Player \"" + player.name + "\" (id " + player.id + ") has left. " + map.players.length + " players currently online.");
     });
   }); 
