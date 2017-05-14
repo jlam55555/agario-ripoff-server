@@ -23,6 +23,7 @@ var Player = function(playerName) {
   this.health = 1;
   this.oldX = 0;
   this.oldY = 0;
+  this.speed = 3;
   this.upgrades = {
     health: 0,
     speed: 0,
@@ -62,12 +63,13 @@ var checkPlayers = function() {
       var yDiff = player1.y - player2.y;
       var distance = Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
       if(distance < 10*(player1.score+player2.score)) {
-        player1.health -= 0.05;
-        player2.health -= 0.05;
-        player1.oldX += Math.cos(player2.direction)*10;
-        player1.oldY += Math.sin(player2.direction)*10;
-        player2.oldX += Math.cos(player1.direction)*10;
-        player2.oldY += Math.sin(player1.direction)*10;
+        player1.health -= 0.05 * Math.pow(0.9, player1.health) * Math.pow(10/9, player2.damage);
+        player2.health -= 0.05 * Math.pow(0.9, player2.health) * Math.pow(10/9, player1.damage);
+        var combinedSpeed = (player1.speed+player2.speed)*10;
+        player1.oldX += Math.cos(player2.direction)*combinedSpeed;
+        player1.oldY += Math.sin(player2.direction)*combinedSpeed;
+        player2.oldX += Math.cos(player1.direction)*combinedSpeed;
+        player2.oldY += Math.sin(player1.direction)*combinedSpeed;
       }
     }
   }
@@ -76,8 +78,8 @@ setInterval(checkPlayers, 40);
 var movePlayers = function() {
   for(var player of map.players) {
     if(player.direction === undefined) continue;
-    var newX = Math.min(Math.max(player.x+0.5*Math.cos(player.direction)*3+0.5*player.oldX, 0), mapWidth);  // change speed later
-    var newY = Math.min(Math.max(player.y+0.5*Math.sin(player.direction)*3+0.5*player.oldY, 0), mapHeight);
+    var newX = Math.min(Math.max(player.x+0.5*Math.cos(player.direction)*player.speed+0.5*player.oldX, 0), mapWidth);  // change speed later
+    var newY = Math.min(Math.max(player.y+0.5*Math.sin(player.direction)*player.speed+0.5*player.oldY, 0), mapHeight);
     player.oldX = newX - player.x;
     player.oldY = newY - player.y;
     player.x = newX;
@@ -105,6 +107,7 @@ io.on("connection", function(socket) {
         socket.emit("died");
         socket.disconnect();
       }
+      player.health = Math.min(player.health + 0.005*(player.regen+1), 1);
     }, 20);
     socket.on("direction", function(degrees) {
       player.direction = degrees * Math.PI/180;
@@ -112,9 +115,11 @@ io.on("connection", function(socket) {
     socket.on("upgrade", function(type) {
       if(type == "health" && player.money >= player.upgrades.health+1) {
         player.upgrades.health++;
+        player.speed -= 0.05;
         player.money -= player.upgrades.health;
       } else if(type == "speed" && player.money >= player.upgrades.speed+1) {
         player.upgrades.speed++;
+        player.speed += 0.1;
         player.money -= player.upgrades.speed;
       } else if(type == "damage" && player.money >= player.upgrades.damage+1) {
         player.upgrades.damage++;
