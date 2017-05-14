@@ -104,6 +104,7 @@ io.on("connection", function(socket) {
     setInterval(function() {
       socket.emit("update", map, player);
       if(player.health <= 0) {
+        console.log(player.health);
         socket.emit("died");
         socket.disconnect();
       }
