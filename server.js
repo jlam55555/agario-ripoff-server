@@ -109,7 +109,7 @@ io.on("connection", function(socket) {
     socket.on("direction", function(degrees) {
       player.direction = degrees * Math.PI/180;
     });
-    socket.on("update", function(type) {
+    socket.on("upgrade", function(type) {
       if(type == "health" && player.money >= player.upgrades.health+1) {
         player.upgrades.health++;
         player.money -= player.upgrades.health;
