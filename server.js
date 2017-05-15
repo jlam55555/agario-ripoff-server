@@ -81,10 +81,10 @@ var movePlayers = function() {
     if(player.direction === undefined) continue;
     var newX = player.x+0.5*Math.cos(player.direction)*player.speed+0.5*player.oldX;
     var newY = player.y+0.5*Math.sin(player.direction)*player.speed+0.5*player.oldY;
-    newX = Math.max(newX, -newX);
-    newX = Math.min(newX, 2*mapWidth-newX);
-    newY = Math.max(newY, -newY);
-    newY = Math.min(newY, 2*mapHeight-newY);
+    newX = Math.max(newX, -2*newX);
+    newX = Math.min(newX, mapWidth-2*(2*mapWidth-newX));
+    newY = Math.max(newY, -2*newY);
+    newY = Math.min(newY, mapHeight-2*(2*mapHeight-newY));
     player.oldX = newX - player.x;
     player.oldY = newY - player.y;
     player.x = newX;
@@ -112,7 +112,7 @@ io.on("connection", function(socket) {
         socket.emit("died");
         socket.disconnect();
       }
-      player.health = Math.min(player.health + 0.0005*(player.upgrades.regen+1), 1);
+      player.health = Math.min(player.health + 0.0005*(player.upgrades.regen*Math.pow(0.9,player.upgrades.health)+1), 1);
     }, 20);
     socket.on("direction", function(degrees) {
       player.direction = degrees * Math.PI/180;
