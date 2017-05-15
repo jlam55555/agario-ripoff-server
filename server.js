@@ -138,7 +138,7 @@ io.on("connection", function(socket) {
       }
     });
     socket.on("message", function(message) {
-      socket.broadcast.emit("otherMessage", player.name, player.color, message);
+      socket.broadcast.emit("message", player.name, player.color, message);
     });
     socket.on("disconnect", function() {
       map.players.splice(map.players.indexOf(player), 1);
