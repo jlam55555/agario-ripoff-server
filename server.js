@@ -88,7 +88,7 @@ var movePlayers = function() {
   for(var player of map.players) {
     if(player.direction === undefined) continue;
     var newX = Math.min(Math.max(player.x+0.5*Math.cos(player.direction)*player.speed+0.5*player.oldX, mapWidth), 0);
-    var newY = Math.min(Math.max(player.y+0.5*Math.sin(player.direction)*player.speed+0.5*player.oldY, mapHeight, 0);
+    var newY = Math.min(Math.max(player.y+0.5*Math.sin(player.direction)*player.speed+0.5*player.oldY, mapHeight), 0);
     player.oldX = newX - player.x;
     player.oldY = newY - player.y;
     player.x = newX;
