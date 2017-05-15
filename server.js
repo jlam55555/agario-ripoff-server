@@ -74,10 +74,8 @@ var checkPlayers = function() {
         if((player1.direction-90) * (player2.direction-90) > 0) {
           if(player1.y == 0 || player1.y == mapHeight) {
             player2.oldY -= Math.sin(player2.direction)*combinedSpeed;
-            console.log("testing");
           } else if(player2.y == 0 || player2.y == mapHeight) {
             player1.oldY -= Math.sin(player1.direction)*combinedSpeed;
-            console.log("testing");
           }
         }
       }
@@ -139,8 +137,8 @@ io.on("connection", function(socket) {
         player.money -= player.upgrades.regen;
       }
     });
-    socket.on("message", function(msg) {
-      socket.broadcast.emit("message", player.name, player.color, message);
+    socket.on("message", function(message) {
+      socket.broadcast.emit("otherMessage", player.name, player.color, message);
     });
     socket.on("disconnect", function() {
       map.players.splice(map.players.indexOf(player), 1);
