@@ -78,6 +78,16 @@ var checkPlayers = function() {
             player1.oldY -= Math.sin(player1.direction)*combinedSpeed;
           }
         }
+        if(
+          ((player1.direction < 0 || player1.direction > 180) && (player2.direction < 0 || player2.direction > 180)) ||
+          ((player1.direction > 0 && player1.direction < 180) && (player2.direction > 0 && player2.direction < 180))
+        ) {
+          if(player1.x == 0 || player1.x == mapWidth) {
+            player2.oldX -= Math.cos(player2.direction)*combinedSpeed;
+          } else if(player2.x == 0 || player2.x == mapWidth) {
+            player1.oldX -= Math.cos(player1.direction)*combinedSpeed;
+          }
+        }
       }
     }
   }
