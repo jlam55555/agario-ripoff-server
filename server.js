@@ -73,10 +73,10 @@ var checkPlayers = function() {
         player2.oldY += Math.sin(player1.direction)*combinedSpeed;
         if((player1.direction-90) * (player2.direction-90) > 0) {
           if(player1.y == 0 || player1.y == mapHeight) {
-            player2.oldY -= Math.sin(player2.direction)*combinedSpeed/2;
+            player2.oldY -= Math.sin(player2.direction)*combinedSpeed*4;
             console.log("testing");
           } else if(player2.y == 0 || player2.y == mapHeight) {
-            player1.oldY -= Math.sin(player1.direction)*combinedSpeed/2;
+            player1.oldY -= Math.sin(player1.direction)*combinedSpeed*4;
             console.log("testing");
           }
         }
