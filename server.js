@@ -71,6 +71,14 @@ var checkPlayers = function() {
         player1.oldY += Math.sin(player2.direction)*combinedSpeed;
         player2.oldX += Math.cos(player1.direction)*combinedSpeed;
         player2.oldY += Math.sin(player1.direction)*combinedSpeed;
+        if(player1.direction * player2.direction == 0) {
+          if(player1.y == 0 || player1.y == mapHeight) {
+            player2.oldY -= Math.sin(player2.direction)*combinedSpeed/2;
+          }
+          else if(player2.y == 0 || player2.y == mapHeight) {
+            player1.oldY -= Math.sin(player1.direction)*combinedSpeed/2;
+          }
+        }
       }
     }
   }
@@ -79,12 +87,8 @@ setInterval(checkPlayers, 40);
 var movePlayers = function() {
   for(var player of map.players) {
     if(player.direction === undefined) continue;
-    var newX = player.x+0.5*Math.cos(player.direction)*player.speed+0.5*player.oldX;
-    var newY = player.y+0.5*Math.sin(player.direction)*player.speed+0.5*player.oldY;
-    newX = Math.max(newX, -2*newX);
-    newX = Math.min(newX, 2*(mapWidth-newX));
-    newY = Math.max(newY, -2*newY);
-    newY = Math.min(newY, 2*(mapHeight-newY));
+    var newX = Math.min(Math.max(player.x+0.5*Math.cos(player.direction)*player.speed+0.5*player.oldX, mapWidth), 0);
+    var newY = Math.min(Math.max(player.y+0.5*Math.sin(player.direction)*player.speed+0.5*player.oldY, mapHeight, 0);
     player.oldX = newX - player.x;
     player.oldY = newY - player.y;
     player.x = newX;
