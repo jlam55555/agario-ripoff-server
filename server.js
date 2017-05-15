@@ -63,9 +63,10 @@ var checkPlayers = function() {
       var yDiff = player1.y - player2.y;
       var distance = Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
       if(distance < 10*(player1.score+player2.score)) {
+        if(player1.direction == undefined || player2.direction == undefined) continue;
         player1.health -= 0.05 * Math.pow(0.9, player1.upgrades.health) * Math.pow(10/9, player2.upgrades.damage);
         player2.health -= 0.05 * Math.pow(0.9, player2.upgrades.health) * Math.pow(10/9, player1.upgrades.damage);
-        var combinedSpeed = (player1.speed+player2.speed);
+        var combinedSpeed = (player1.speed+player2.speed)/2;
         player1.oldX += Math.cos(player2.direction)*combinedSpeed;
         player1.oldY += Math.sin(player2.direction)*combinedSpeed;
         player2.oldX += Math.cos(player1.direction)*combinedSpeed;
@@ -78,8 +79,12 @@ setInterval(checkPlayers, 40);
 var movePlayers = function() {
   for(var player of map.players) {
     if(player.direction === undefined) continue;
-    var newX = Math.min(Math.max(player.x+0.5*Math.cos(player.direction)*player.speed+0.5*player.oldX, 0), mapWidth);  // change speed later
-    var newY = Math.min(Math.max(player.y+0.5*Math.sin(player.direction)*player.speed+0.5*player.oldY, 0), mapHeight);
+    var newX = player.x+0.5*Math.cos(player.direction)*player.speed+0.5*player.oldX;
+    var newY = player.y+0.5*Math.sin(player.direction)*player.speed+0.5*player.oldY;
+    newX = Math.max(newX, -newX);
+    newX = Math.min(newX, 2*mapWidth-newX);
+    newY = Math.max(newY, -newY);
+    newY = Math.min(newY, 2*mapHeight-newY);
     player.oldX = newX - player.x;
     player.oldY = newY - player.y;
     player.x = newX;
