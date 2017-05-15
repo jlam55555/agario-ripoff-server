@@ -66,17 +66,17 @@ var checkPlayers = function() {
         if(player1.direction == undefined || player2.direction == undefined) continue;
         player1.health -= 0.05 * Math.pow(0.9, player1.upgrades.health) * Math.pow(10/9, player2.upgrades.damage);
         player2.health -= 0.05 * Math.pow(0.9, player2.upgrades.health) * Math.pow(10/9, player1.upgrades.damage);
-        var combinedSpeed = (player1.speed+player2.speed);
+        var combinedSpeed = (player1.speed+player2.speed)*4;
         player1.oldX += Math.cos(player2.direction)*combinedSpeed;
         player1.oldY += Math.sin(player2.direction)*combinedSpeed;
         player2.oldX += Math.cos(player1.direction)*combinedSpeed;
         player2.oldY += Math.sin(player1.direction)*combinedSpeed;
         if((player1.direction-90) * (player2.direction-90) > 0) {
           if(player1.y == 0 || player1.y == mapHeight) {
-            player2.oldY -= Math.sin(player2.direction)*combinedSpeed*4;
+            player2.oldY -= Math.sin(player2.direction)*combinedSpeed;
             console.log("testing");
           } else if(player2.y == 0 || player2.y == mapHeight) {
-            player1.oldY -= Math.sin(player1.direction)*combinedSpeed*4;
+            player1.oldY -= Math.sin(player1.direction)*combinedSpeed;
             console.log("testing");
           }
         }
