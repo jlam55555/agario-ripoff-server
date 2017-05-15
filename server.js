@@ -139,6 +139,9 @@ io.on("connection", function(socket) {
         player.money -= player.upgrades.regen;
       }
     });
+    socket.on("message", function(msg) {
+      socket.broadcast.emit("message", player.name, player.color, message);
+    });
     socket.on("disconnect", function() {
       map.players.splice(map.players.indexOf(player), 1);
       console.log("Player \"" + player.name + "\" (id " + player.id + ") has left. " + map.players.length + " players currently online.");
