@@ -87,8 +87,8 @@ setInterval(checkPlayers, 40);
 var movePlayers = function() {
   for(var player of map.players) {
     if(player.direction === undefined) continue;
-    var newX = Math.min(Math.max(player.x+0.5*Math.cos(player.direction)*player.speed+0.5*player.oldX, mapWidth), 0);
-    var newY = Math.min(Math.max(player.y+0.5*Math.sin(player.direction)*player.speed+0.5*player.oldY, mapHeight), 0);
+    var newX = Math.min(Math.max(player.x+0.5*Math.cos(player.direction)*player.speed+0.5*player.oldX, 0), mapWidth);
+    var newY = Math.min(Math.max(player.y+0.5*Math.sin(player.direction)*player.speed+0.5*player.oldY, 0), mapHeight);
     player.oldX = newX - player.x;
     player.oldY = newY - player.y;
     player.x = newX;
@@ -146,4 +146,3 @@ io.on("connection", function(socket) {
   socket.emit("mapDimensions", mapWidth, mapHeight);
   
 });
-
