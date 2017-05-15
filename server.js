@@ -71,7 +71,7 @@ var checkPlayers = function() {
         player1.oldY += Math.sin(player2.direction)*combinedSpeed;
         player2.oldX += Math.cos(player1.direction)*combinedSpeed;
         player2.oldY += Math.sin(player1.direction)*combinedSpeed;
-        if(player1.direction * player2.direction == 0) {
+        if((player1.direction-90) * (player2.direction-90) == 0) {
           if(player1.y == 0 || player1.y == mapHeight) {
             player2.oldY -= Math.sin(player2.direction)*combinedSpeed/2;
           }
