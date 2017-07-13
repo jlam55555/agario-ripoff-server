@@ -2,6 +2,9 @@
   "name": "agario-ripoff-server",
   "version": "0.0.1",
   "description": "The server for the agario-ripoff game",
+  "engines": {
+    "node": "8.1.4"
+  },
   "dependencies": {
     "express": "*",
     "socket.io": "*"
